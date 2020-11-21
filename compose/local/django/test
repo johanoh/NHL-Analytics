@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+export  DJANGO_SETTINGS_MODULE=config.settings.local
+
+# force DB from docker
+export DATABASE_ENGINE=django.db.backends.postgresql_psycopg2
+export DATABASE_NAME=postgres
+export DATABASE_USER=postgres
+export DATABASE_PASSWORD=postgres
+export DATABASE_HOST=db
+export DATABASE_PORT=5432
+
+cd /app
+pytest -s -v $@

@@ -1,0 +1,9 @@
+-r ./base.txt
+
+coverage==5.1
+flake8==3.8.3
+pytest==5.4.3
+pytest-cov==2.10.0
+
+ipdb==0.13.2
+pdbpp==0.10.2

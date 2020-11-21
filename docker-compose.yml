@@ -1,0 +1,50 @@
+version: '3'
+
+volumes:
+  local_postgres_data: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: dps_local_django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+      - ~/.pdbrc.py:/root/.pdbrc.py  # if it exists, use it!
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - "8000:8000"
+    command: /start
+
+  postgres:
+    image: postgres:11.3
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.envs/.local/.postgres
+    ports:
+      - "5432:5432"
+
+  test:
+    <<: *django
+    command:
+      test
+
+  test-coverage:
+    <<: *django
+    command:
+      test --cov-report term-missing --cov-report xml --cov=.
+
+  local:
+    <<: *django
+
+  production:
+    <<: *django
+    env_file:
+      - ./.envs/.production/.django
+      - ./.envs/.production/.postgres

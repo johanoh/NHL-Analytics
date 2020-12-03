@@ -21,3 +21,5 @@ repos:
         rev: v1.5.1
         hooks:
         -   id: python-check-blanket-noqa
+default_language_version:
+    python: python3.8

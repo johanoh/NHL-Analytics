@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Conference(models.Model):
 
     id = models.BigIntegerField(primary_key=True)
@@ -12,6 +13,7 @@ class Conference(models.Model):
     active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
 
 class Division(models.Model):
 
@@ -24,6 +26,7 @@ class Division(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
 class Franchise(models.Model):
 
     id = models.BigIntegerField(primary_key=True)
@@ -33,8 +36,9 @@ class Franchise(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
 class Team(models.Model):
-    
+
     id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=100)
     link = models.CharField(max_length=100)
@@ -54,7 +58,3 @@ class Team(models.Model):
     franchise_id = models.ForeignKey(Franchise, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-
-
-

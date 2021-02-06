@@ -33,5 +33,8 @@ class LeagueClient(NHLClient):
     def get_all_active_conferences(self) -> list:
         return self._get('conferences').json().get('conferences')
 
+    def get_all_active_divisions(self) -> list:
+        return self._get('divisions').json().get('divisions')
+
     def get_all_active_teams(self) -> list:
-        return self._get('teams').json()
+        return self._get('teams').json().get('teams')

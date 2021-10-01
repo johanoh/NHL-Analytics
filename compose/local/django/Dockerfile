@@ -8,14 +8,14 @@ RUN apt-get update \
   # psycopg2 dependencies
   && apt-get install -y build-essential gcc musl-dev libpq-dev \
   # Encryption dependencies
-  && apt-get install -y libffi-dev python-cffi gnupg \
+  && apt-get install -y libffi-dev python3-cffi gnupg \
   # Translations dependencies
   && apt-get install -y gettext \
   # https://docs.djangoproject.com/en/dev/ref/django-admin/#dbshell
   && apt-get install -y postgresql-client \
   # project dependencies
-  && apt-get install -y git libssl-dev libcurl4-openssl-dev
-
+  && apt-get install -y git libssl-dev libcurl4-openssl-dev \
+  && apt-get install -y libxml2-dev libxslt-dev python-dev
 
 COPY ./compose/common/entrypoint /entrypoint
 COPY ./compose/common/django/pm /usr/local/bin/pm

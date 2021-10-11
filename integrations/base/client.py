@@ -14,6 +14,7 @@ class BaseClient:
         return response
 
     def url_join(self, args_list) -> str:
+        args_list = list(map(str, args_list))
         return f'{self.host}/{"/".join(args_list)}'
 
     @classmethod

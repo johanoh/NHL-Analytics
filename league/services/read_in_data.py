@@ -1,21 +1,15 @@
-from requests_handler.league import (
-    get_conference,
-    get_division,
-    get_team,
-    get_franchise
-)
 from datetime import datetime
-from league.models import (
-    Conference,
-    Division,
-    Team,
-    Franchise
-)
 
+from integrations.nhl.client import LeagueClient
+
+
+from league.models import Conference, Division, Team, Franchise
+
+client = LeagueClient()
 
 def insert_conference(conference_id):
 
-    response = get_conference(conference_id)
+    response = client.get_conference(conference_id)
     if type(response) == dict:
         Conference(
             id=response.get('id'),
@@ -29,7 +23,7 @@ def insert_conference(conference_id):
 
 def insert_division(division_id):
 
-    response = get_division(division_id)
+    response = client.get_division(division_id)
     if type(response) == dict:
         conference_id = response.get('conference').get('id')
         if not check_unique_id(Conference, conference_id):
@@ -46,7 +40,7 @@ def insert_division(division_id):
 
 
 def insert_franchise(franchise_id):
-    response = get_franchise(franchise_id)
+    response = client.get_franchise(franchise_id)
     franchise = Franchise(
         id=response.get('franchiseId'),
         first_year_of_play=datetime(
@@ -62,7 +56,7 @@ def insert_franchise(franchise_id):
 
 
 def insert_team(team_id):
-    response = get_team(team_id)
+    response = client.get_team(team_id)
     if type(response) == dict:
         conference_id = response.get('conference').get('id')
         division_id = response.get('division').get('id')

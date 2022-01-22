@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from integrations.nhl.client import LeagueClient
+from integrations.nhl.league_client import LeagueClient
 
 
 from league.models import Conference, Division, Team, Franchise
